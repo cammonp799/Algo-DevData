@@ -3,36 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌤️ Météo Toulouse</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Météo Métro Toulouse</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🌤️ Météo Toulouse</h1>
-            <p class="subtitle">Données météorologiques en temps réel</p>
-            <button id="refresh-btn" class="btn-refresh">🔄 Actualiser</button>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="icon">🚇</span>
+            <span class="brand-name">MétéoMétro TLS</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Accueil</a></li>
+            <li><a href="https://data.toulouse-metropole.fr/" target="_blank">OpenData</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header class="hero">
+            <h1>Préparez votre sortie de métro</h1>
+            <p>Découvrez la météo en temps réel à votre station d'arrivée à Toulouse.</p>
         </header>
 
-        <div id="loading" class="loading">
+        <div class="search-wrapper">
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Rechercher une station (ex: Capitole, Arènes...)" autocomplete="off">
+            </div>
+            <div id="suggestions" class="suggestions-box"></div>
+        </div>
+
+        <div id="loading" class="hidden loading-spinner">
             <div class="spinner"></div>
-            <p>Chargement des données météo...</p>
+            <p>Connexion aux capteurs météo...</p>
         </div>
 
-        <div id="error" class="error hidden">
-            <p>❌ Erreur lors du chargement des données</p>
+        <div id="weatherCard" class="weather-card hidden">
+            <div class="card-header">
+                <div>
+                    <h2 id="metroName">Nom Station</h2>
+                    <p class="subtitle">Météo en direct à la sortie</p>
+                </div>
+                <span class="badge" id="metroLine">Ligne A</span>
+            </div>
+
+            <div class="card-body">
+                <div class="main-temp">
+                    <span id="tempValue">--</span><span class="unit">°C</span>
+                </div>
+
+                <div class="weather-metrics">
+                    <div class="metric">
+                        <span class="metric-icon">🌧️</span>
+                        <span class="metric-label">Pluie</span>
+                        <span class="metric-value"><span id="rainValue">0</span> mm</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-icon">💧</span>
+                        <span class="metric-label">Humidité</span>
+                        <span class="metric-value"><span id="humValue">0</span> %</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-icon">💨</span>
+                        <span class="metric-label">Vent</span>
+                        <span class="metric-value"><span id="windValue">0</span> km/h</span>
+                    </div>
+                </div>
+            </div>
         </div>
+    </main>
 
-        <main id="stations-container" class="stations-grid">
-            <!-- Les cartes des stations seront insérées ici -->
-        </main>
-
-        <footer>
-            <p>📊 Source: OpenData Toulouse Métropole</p>
-            <p id="last-update">Dernière mise à jour: --</p>
-        </footer>
-    </div>
+    <footer class="footer">
+        <p>Développé avec ❤️ pour les Toulousains</p>
+        <p class="footer-sub">Données fournies par OpenData Toulouse Métropole</p>
+    </footer>
 
     <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
