@@ -1,36 +1,34 @@
 #!/bin/bash
 
-# Script de démarrage du projet Météo Toulouse
+# Script de démarrage du projet Météo Toulouse (Mode Web)
 
-echo "🌤️  Démarrage de l'application Météo Toulouse..."
+echo "🌤️  Démarrage de l'application Web Météo Métro Toulouse..."
 echo ""
 
-# Naviguer au projet
-cd /Users/juniorchimene/PycharmProjects/project_weather_toulouse
+# Se place automatiquement dans le dossier où se trouve le script (très important pour le partage)
+cd "$(dirname "$0")"
 
-# Vérifier que l'environnement est activé
+# Vérifier ou créer l'environnement virtuel
 if [ -d ".venv" ]; then
-    echo "✅ Environnement virtuel trouvé"
+    echo "✅ Environnement virtuel trouvé."
     source .venv/bin/activate
 else
-    echo "⚠️  Environnement virtuel non trouvé. Création..."
+    echo "⚠️  Environnement virtuel non trouvé. Création en cours..."
     python3 -m venv .venv
     source .venv/bin/activate
-    pip install -q -r requirements.txt
 fi
 
-echo "✅ Environnement activé"
+echo "✅ Environnement activé."
 echo ""
-echo "📦 Installation des dépendances..."
+echo "📦 Vérification et installation des dépendances..."
+# Installe les dépendances listées dans requirements.txt (dont flask et requests)
 pip install -q -r requirements.txt
 
-echo "✅ Dépendances installées"
+echo "✅ Dépendances prêtes."
 echo ""
-echo "🚀 Lancement de l'application..."
+echo "🚀 Lancement du serveur Web..."
+echo "👉 Ouvrez votre navigateur et allez sur : http://localhost:5001"
 echo ""
 
-# Lancer l'application
-python -m meteo_toulouse.main
-
-echo ""
-echo "✅ Application terminée"
+# Lancer la NOUVELLE application Web
+python web_app.py

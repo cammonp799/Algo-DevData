@@ -1,4 +1,6 @@
-\"\"\"\nApplication Web Flask pour Météo Toulouse\nFrontend moderne pour visualiser les données météo en temps réel\n\"\"\"\n\nfrom flask import Flask, render_template, jsonify\nimport sys\nimport os\n\n# Ajouter le chemin du projet\nsys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))\n\nfrom meteo_toulouse.extractors.ApiDataExtractor import ApiDataExtractor\nfrom meteo_toulouse.extractors.ExtractionQueue import ExtractionQueue\nfrom meteo_toulouse.mappers.RecordMapper import RecordMapper\nfrom meteo_toulouse.models.LinkedList import StationLinkedList\nfrom meteo_toulouse.config import STATIONS_CIBLES\n\napp = Flask(__name__, template_folder='templates', static_folder='static')\n\n\ndef get_weather_data():\n    \"\"\"Récupère les données météo de toutes les stations.\"\"\"\n    stations_data = []\n    \n    # Créer la file d'attente et l'extracteur\n    queue = ExtractionQueue()\n    extractor = ApiDataExtractor()\n    mapper = RecordMapper()\n    \n    # Ajouter les stations à la file\n    for station_id in STATIONS_CIBLES:\n        queue.enqueue(station_id, \"api\")\n    \n    # Traiter la file\n    while not queue.is_empty():\n        task = queue.dequeue()\n        station_id = task[\"station_id\"]\n        \n        try:\n            raw_data = extractor.extract(station_id)\n            if raw_data:\n                records = mapper.map(raw_data)\n                \n                # Prendre le dernier enregistrement (le plus récent)\n                if records:\n                    latest_record = records[0] if isinstance(records, list) else records\n                    \n                    station_info = {\n                        \"id\": station_id,\n                        \"name\": station_id.replace(\"-\", \" \").title(),\n                        \"temperature\": getattr(latest_record, 'temperature', None),\n                        \"humidite\": getattr(latest_record, 'humidite', None),\n                        \"pression\": getattr(latest_record, 'pression', None),\n                        \"pluie\": getattr(latest_record, 'pluie', 0),\n                        \"vent\": getattr(latest_record, 'force_vent_moyen', None),\n                        \"direction_vent\": getattr(latest_record, 'direction_vent_moyen', None),\n                        \"heure\": str(getattr(latest_record, 'heure_utc', 'N/A'))\n                    }\n                    stations_data.append(station_info)\n        except Exception as e:\n            print(f\"Erreur pour {station_id}: {e}\")\n            stations_data.append({\n                \"id\": station_id,\n                \"name\": station_id.replace(\"-\", \" \").title(),\n                \"error\": str(e)\n            })\n    \n    return stations_data\n\n\n@app.route('/')\ndef index():\n    \"\"\"Page principale.\"\"\"\n    return render_template('index.html')\n\n\n@app.route('/api/weather')\ndef api_weather():\n    \"\"\"API endpoint pour les données météo.\"\"\"\n    try:\n        data = get_weather_data()\n        return jsonify({\"success\": True, \"stations\": data})\n    except Exception as e:\n        return jsonify({\"success\": False, \"error\": str(e)})\n\n\n@app.route('/api/stations')\ndef api_stations():\n    \"\"\"Liste des stations disponibles.\"\"\"\n    return jsonify({\"stations\": list(STATIONS_CIBLES)})\n\n\nif __name__ == '__main__':\n    print(\"🌤️ Démarrage du serveur Météo Toulouse...\")\n    print(\"📡 Accédez à http://localhost:5000\")\n    app.run(debug=True, host='0.0.0.0', port=5000)\n
+# Application Météo Toulouse (Structurée)
+---
+## Description
 
 ✅ **Récupération des données météo** via API OpenData Toulouse  
 ✅ **Traitement avec une file d'attente** (Queue pattern)  
@@ -16,8 +18,13 @@
 ### Étapes
 
 ```bash
-# Cloner ou naviguer vers le projet
-cd /Users/juniorchimene/PycharmProjects/project_weather_toulouse
+```bash
+# Cloner le projet
+git clone https://github.com/cammonp799/Algo-DevData.git
+cd algo-devdata
+
+# Lancer le script d'installation et de démarrage automatique
+bash run.sh
 
 # Créer un environnement virtuel
 python3 -m venv .venv
@@ -28,17 +35,9 @@ source .venv/bin/activate  # Sur macOS/Linux
 # Installer les dépendances
 pip install -r requirements.txt
 ```
-
-## Utilisation
-
-### Lancer l'application
-
 ```bash
-# Via module principal
-python -m meteo_toulouse.main
-
-# Ou directement
-python meteo_toulouse/main.py
+### Lancer l'interface Web
+python web_app.py
 ```
 
 ### Exemple de sortie
