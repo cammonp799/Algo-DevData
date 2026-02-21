@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌤️ Météo Toulouse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌤️ Météo Toulouse</h1>
+            <p class="subtitle">Données météorologiques en temps réel</p>
+            <button id="refresh-btn" class="btn-refresh">🔄 Actualiser</button>
+        </header>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Chargement des données météo...</p>
+        </div>
+
+        <div id="error" class="error hidden">
+            <p>❌ Erreur lors du chargement des données</p>
+        </div>
+
+        <main id="stations-container" class="stations-grid">
+            <!-- Les cartes des stations seront insérées ici -->
+        </main>
+
+        <footer>
+            <p>📊 Source: OpenData Toulouse Métropole</p>
+            <p id="last-update">Dernière mise à jour: --</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
