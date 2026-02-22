@@ -221,6 +221,6 @@ Checklist:
 
 ---
 
-**Date**: Février 2025
+**Date**: 22 Février 2026
 **Auteur**: Projet académique
-**Version**: 1.0
+**Version**: 3.0
