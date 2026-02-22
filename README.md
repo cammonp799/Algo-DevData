@@ -11,7 +11,7 @@ Grâce à la conteneurisation Docker, aucune installation de Python ou d'environ
 
 ```bash
 
-git clone [https://github.com/votre-pseudo/algo-devdata.git](https://github.com/votre-pseudo/algo-devdata.git)
+git clone https://github.com/cammonp799/Algo-DevData.git
 cd algo-devdata
 
 ```
@@ -24,19 +24,22 @@ bash run.sh
 ```
 
 --- Ouvrez ensuite votre navigateur à l'adresse : http://localhost:5001
-(Pour arrêter le serveur, faites simplement Ctrl+C dans le terminal).
+    (Pour arrêter le serveur, faites simplement Ctrl+C dans le terminal).
 
 --- Documentation Technique
-Pour en savoir plus sur les choix techniques, les algorithmes et l'architecture du projet, veuillez consulter les documents détaillés dans le dossier meteo_toulouse/src/docs/ :
+    Pour en savoir plus sur les choix techniques, les algorithmes et l'architecture du projet, veuillez consulter les documents détaillés dans le dossier meteo_toulouse/src/docs/ :
 
---- Documentation Globale (DOCUMENTATION.md) : Fonctionnalités, exemples CLI, statistiques et accès à l'API OpenData.
+--- Documentation Globale (DOCUMENTATION.md) :
+    Fonctionnalités, exemples CLI, statistiques et accès à l'API OpenData.
 
---- Architecture & Concepts (architecture.md) : Explication de la Clean Architecture, du Multithreading et des Design Patterns (Strategy, Decorator, Singleton).
+--- Architecture & Concepts (architecture.md) : 
+    Explication de la Clean Architecture, du Multithreading et des Design Patterns (Strategy, Decorator, Singleton).
  
---- Grille d'évaluation (CHECKLIST.md) : Validation des principes SOLID, PEP8, et implémentation des structures de données (LinkedList, Queue).
+--- Grille d'évaluation (CHECKLIST.md) : 
+    Validation des principes SOLID, PEP8, et implémentation des structures de données (LinkedList, Queue).
 
-🧪 Tests Qualité
-L'application est couverte par des tests unitaires (nécessite un environnement Python local) :
+--- Tests Qualité
+    L'application est couverte par des tests unitaires (nécessite un environnement Python local) :
 
 ```bash
 
