@@ -1,1 +1,10 @@
-.idea
+# Fichiers de configuration IDE
+.idea/
+
+# Fichiers générés par Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Fichiers système
+.DS_Store
