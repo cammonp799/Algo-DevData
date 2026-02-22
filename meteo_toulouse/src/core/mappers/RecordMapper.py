@@ -6,8 +6,8 @@ pour transformer les données JSON brutes en objets Record.
 
 from datetime import datetime
 from typing import Dict, Any, Optional
-from meteo_toulouse.interfaces.IDataMapper import IDataMapper
-from meteo_toulouse.models.Record import Record
+from meteo_toulouse.src.core.interfaces.IDataMapper import IDataMapper
+from meteo_toulouse.src.core.models.Record import Record
 
 
 class RecordMapper(IDataMapper):

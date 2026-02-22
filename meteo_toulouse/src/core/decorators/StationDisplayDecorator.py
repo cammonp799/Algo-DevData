@@ -4,8 +4,8 @@ Ce module implémente le Design Pattern Decorator pour ajouter
 des responsabilités d'affichage aux objets Station.
 """
 
-from meteo_toulouse.models.Station import Station
-from meteo_toulouse.decorators.RecordDisplayDecorator import RecordDisplayDecorator
+from meteo_toulouse.src.core.models import Station
+from meteo_toulouse.src.core.decorators.RecordDisplayDecorator import RecordDisplayDecorator
 
 
 class StationDisplayDecorator:

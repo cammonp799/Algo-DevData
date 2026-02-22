@@ -6,7 +6,7 @@ météorologique avec ses enregistrements de données.
 
 from dataclasses import dataclass, field
 from typing import List
-from meteo_toulouse.models.Record import Record
+from meteo_toulouse.src.core.models.Record import Record
 
 
 @dataclass

@@ -8,9 +8,9 @@ Tests pour:
 
 import unittest
 from datetime import datetime
-from meteo_toulouse.models.Record import Record
-from meteo_toulouse.models.Station import Station
-from meteo_toulouse.models.LinkedList import StationLinkedList, Node
+from meteo_toulouse.src.core.models import Record
+from meteo_toulouse.src.core.models import Station
+from meteo_toulouse.src.core.models import StationLinkedList, Node
 
 
 class TestRecord(unittest.TestCase):

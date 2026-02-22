@@ -1,34 +1,28 @@
 #!/bin/bash
 
-# Script de démarrage du projet Météo Toulouse (Mode Web)
+# Script de démarrage 100% Docker
 
-echo "🌤️  Démarrage de l'application Web Météo Métro Toulouse..."
+echo "🐳 Démarrage de Météo Métro Toulouse via Docker..."
 echo ""
 
-# Se place automatiquement dans le dossier où se trouve le script (très important pour le partage)
+# Se placer automatiquement à la racine du projet
 cd "$(dirname "$0")"
 
-# Vérifier ou créer l'environnement virtuel
-if [ -d ".venv" ]; then
-    echo "✅ Environnement virtuel trouvé."
-    source .venv/bin/activate
-else
-    echo "⚠️  Environnement virtuel non trouvé. Création en cours..."
-    python3 -m venv .venv
-    source .venv/bin/activate
-fi
+# Nom de notre image Docker
+IMAGE_NAME="meteo-toulouse-app"
 
-echo "✅ Environnement activé."
-echo ""
-echo "📦 Vérification et installation des dépendances..."
-# Installe les dépendances listées dans requirements.txt (dont flask et requests)
-pip install -q -r requirements.txt
+echo "📦 Étape 1 : Construction de l'image Docker..."
+# Le tag -t donne un nom à l'image. Le "." signifie "utilise le Dockerfile d'ici"
+docker build -t $IMAGE_NAME .
 
-echo "✅ Dépendances prêtes."
 echo ""
-echo "🚀 Lancement du serveur Web..."
+echo "✅ Image prête !"
+echo "🚀 Étape 2 : Lancement du serveur Web..."
 echo "👉 Ouvrez votre navigateur et allez sur : http://localhost:5001"
-echo ""
+echo "⚠️  (Pour arrêter le serveur proprement, appuyez sur Ctrl+C)"
+echo "------------------------------------------------------"
 
-# Lancer la NOUVELLE application Web
-python web_app.py
+# Lancement du conteneur
+# --rm : Supprime le conteneur automatiquement quand on l'arrête (garde le PC propre)
+# -p 5001:5001 : Relie le port 5001 de votre Mac au port 5001 du conteneur
+docker run --rm -p 5001:5001 $IMAGE_NAME

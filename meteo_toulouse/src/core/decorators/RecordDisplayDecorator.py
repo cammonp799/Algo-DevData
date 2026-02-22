@@ -4,7 +4,7 @@ Ce module implémente le Design Pattern Decorator pour ajouter
 des responsabilités d'affichage aux objets Record.
 """
 
-from meteo_toulouse.models.Record import Record
+from meteo_toulouse.src.core.models import Record
 
 
 class RecordDisplayDecorator:

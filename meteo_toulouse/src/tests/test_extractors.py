@@ -6,7 +6,7 @@ Tests pour:
 """
 
 import unittest
-from meteo_toulouse.extractors.ExtractionQueue import (
+from meteo_toulouse.src.core.extractors.ExtractionQueue import (
     ExtractionQueue,
     ExtractionTask
 )

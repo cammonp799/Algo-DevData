@@ -8,7 +8,7 @@ et retirées du début (FIFO).
 """
 
 from typing import Optional, Dict, Any
-from meteo_toulouse.interfaces.IDataExtractor import IDataExtractor
+from meteo_toulouse.src.core.interfaces.IDataExtractor import IDataExtractor
 
 
 class ExtractionTask:

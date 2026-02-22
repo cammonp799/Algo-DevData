@@ -6,8 +6,8 @@ pour extraire les données depuis l'API OpenData Toulouse.
 
 from typing import Dict, Any
 import requests
-from meteo_toulouse.interfaces.IDataExtractor import IDataExtractor
-from meteo_toulouse.utils.Configuration import Configuration
+from meteo_toulouse.src.core.interfaces.IDataExtractor import IDataExtractor
+from meteo_toulouse.src.core.utils.Configuration import Configuration
 
 
 class ApiDataExtractor(IDataExtractor):

@@ -7,7 +7,7 @@ Structure: Chaque nœud contient une station et pointe vers le nœud suivant.
 """
 
 from typing import Optional
-from meteo_toulouse.models.Station import Station
+from meteo_toulouse.src.core.models.Station import Station
 
 
 class Node:
@@ -87,7 +87,7 @@ class StationLinkedList:
 
         Opération: O(n) où n est le nombre de stations
         """
-        from meteo_toulouse.decorators.StationDisplayDecorator import (
+        from meteo_toulouse.src.core.decorators.StationDisplayDecorator import (
             StationDisplayDecorator
         )
 
